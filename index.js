@@ -19,12 +19,9 @@ const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT;
 
 mongoose
-  .connect(
-    "mongodb+srv://denipamungkas:BMSBGDTG@cluster0.yzqqxu4.mongodb.net/?retryWrites=true&w=majority",
-    {
-      dbName: "Blog",
-    }
-  )
+  .connect(DATABASE_URL, {
+    dbName: "Blog",
+  })
   .then(() => {
     return console.log("connected to database");
   })
