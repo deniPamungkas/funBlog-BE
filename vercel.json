@@ -6,12 +6,6 @@
       "use": "@vercel/node"
     }
   ],
-  "headers": [
-    {
-      "key": "Access-Control-Allow-Origin",
-      "value": "http://localhost:5173"
-    }
-  ],
   "routes": [
     {
       "src": "/(.*)",
