@@ -16,15 +16,18 @@ export const login = async (req, res) => {
     if (user || email) {
       bcrypt.compare(hashedPassword, data.password, (err, result) => {
         if (err) return res.status(401).json({ eror: "masukkan passwordmu" });
-        if (!result) return res.status(402).json("wrong password");
-        const token = jwt.sign({ id: data._id }, JWT_SECRET_KEY);
-        const { $__, $isNew, ...val } = data;
-        const { password, ...dataUser } = val._doc;
-        console.log(token);
-        return res
-          .status(200)
-          .cookie("accessToken", token, { httpOnly: true })
-          .json(dataUser);
+        if (!result) {
+          return res.status(402).json("wrong password");
+        } else {
+          const token = jwt.sign({ id: data._id }, JWT_SECRET_KEY);
+          const { $__, $isNew, ...val } = data;
+          const { password, ...dataUser } = val._doc;
+          console.log(token);
+          return res
+            .status(200)
+            .cookie("accessToken", token, { httpOnly: true })
+            .json(dataUser);
+        }
       });
     } else {
       return res.status(404).json("username not found");
