@@ -22,11 +22,7 @@ export const login = async (req, res) => {
           const token = jwt.sign({ id: data._id }, JWT_SECRET_KEY);
           const { $__, $isNew, ...val } = data;
           const { password, ...dataUser } = val._doc;
-          console.log(token);
-          return res
-            .status(200)
-            .cookie("accessToken", token, { httpOnly: true })
-            .json(dataUser);
+          return res.status(200).cookie("accessToken", token).json(dataUser);
         }
       });
     } else {
