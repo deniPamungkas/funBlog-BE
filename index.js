@@ -18,13 +18,6 @@ const app = express();
 const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT;
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
-
 mongoose
   .connect(DATABASE_URL, {
     dbName: "Blog",
