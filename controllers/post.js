@@ -1,10 +1,15 @@
 import postSchema from "../models/post.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 export const makePost = (req, res) => {
   const token = req.cookies.accessToken;
   try {
-    jwt.verify(token, "secretkey", async (err, userInfo) => {
+    jwt.verify(token, JWT_SECRET_KEY, async (err, userInfo) => {
       if (err) return res.status(400).json("not logged in");
       const newPost = new postSchema({
         author: userInfo.id,
@@ -25,7 +30,7 @@ export const makePost = (req, res) => {
 export const getOnePost = (req, res) => {
   const token = req.cookies.accessToken;
   try {
-    jwt.verify(token, "secretkey", async (err, userInfo) => {
+    jwt.verify(token, JWT_SECRET_KEY, async (err, userInfo) => {
       if (err) return res.status(400).json("not logged in");
       const result = await postSchema.findById(req.params.id);
       return res.status(200).json(result);
@@ -38,7 +43,7 @@ export const getOnePost = (req, res) => {
 export const getMyPost = (req, res) => {
   const token = req.cookies.accessToken;
   try {
-    jwt.verify(token, "secretkey", async (err, userInfo) => {
+    jwt.verify(token, JWT_SECRET_KEY, async (err, userInfo) => {
       if (err) return res.status(400).json("not logged in");
       const result = await postSchema.find({ author: userInfo.id });
       return res.status(200).json(result);
@@ -69,7 +74,7 @@ export const getPosts = async (req, res) => {
 export const deletePost = (req, res) => {
   const token = req.cookies.accessToken;
   try {
-    jwt.verify(token, "secretkey", async (err, userInfo) => {
+    jwt.verify(token, JWT_SECRET_KEY, async (err, userInfo) => {
       if (err) return res.status(400).json("not logged in");
       const po = await postSchema.deleteOne({ _id: req.params.id });
       return res.status(200).json(po);
@@ -82,7 +87,7 @@ export const deletePost = (req, res) => {
 export const updatePost = (req, res) => {
   const token = req.cookies.accessToken;
   try {
-    jwt.verify(token, "secretkey", async (err, userInfo) => {
+    jwt.verify(token, JWT_SECRET_KEY, async (err, userInfo) => {
       if (err) return res.status(400).json("not logged in");
       const po = await postSchema.findOneAndUpdate(
         { _id: req.params.id },

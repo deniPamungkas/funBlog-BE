@@ -1,6 +1,11 @@
 import userSchema from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 export const login = async (req, res) => {
   try {
@@ -12,7 +17,7 @@ export const login = async (req, res) => {
       bcrypt.compare(hashedPassword, data.password, (err, result) => {
         if (err) return res.status(401).json({ eror: "masukkan passwordmu" });
         if (!result) return res.status(402).json("wrong password");
-        const token = jwt.sign({ id: data._id }, "secretkey");
+        const token = jwt.sign({ id: data._id }, JWT_SECRET_KEY);
         const { $__, $isNew, ...val } = data;
         const { password, ...dataUser } = val._doc;
         return res

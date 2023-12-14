@@ -9,17 +9,19 @@ import url from "url";
 import auth from "./routes/auth.js";
 import post from "./routes/post.js";
 import uploadFile from "./routes/uploadFile.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
-const PORT = 5000;
+
+const DATABASE_URL = process.env.DATABASE_URL;
+const PORT = process.env.PORT;
 
 mongoose
-  .connect(
-    "mongodb+srv://denipamungkas:BMSBGDTG@cluster0.yzqqxu4.mongodb.net/?retryWrites=true&w=majority",
-    {
-      dbName: "Blog",
-    }
-  )
+  .connect(DATABASE_URL, {
+    dbName: "Blog",
+  })
   .then(() => {
     return console.log("connected to database");
   })
