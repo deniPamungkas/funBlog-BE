@@ -17,6 +17,8 @@ const app = express();
 
 const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT;
+const as = process.env.JWT_SECRET_KEY;
+console.log(as);
 
 mongoose
   .connect(DATABASE_URL, {
