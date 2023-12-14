@@ -26,7 +26,7 @@ mongoose
     return console.log("connected to database");
   })
   .catch((error) => {
-    return console.log(error, "gagal to connect database");
+    return console.log(error);
   });
 
 app.listen(PORT, () => {
