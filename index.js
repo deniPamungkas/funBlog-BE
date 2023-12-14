@@ -17,7 +17,6 @@ const app = express();
 
 const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT;
-console.log(DATABASE_URL);
 
 mongoose
   .connect(DATABASE_URL, {
