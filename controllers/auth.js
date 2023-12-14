@@ -23,11 +23,7 @@ export const login = async (req, res) => {
         console.log(token);
         return res
           .status(200)
-          .cookie("accessToken", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-          })
+          .cookie("accessToken", token, { httpOnly: true })
           .json(dataUser);
       });
     } else {
