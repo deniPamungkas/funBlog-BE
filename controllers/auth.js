@@ -24,7 +24,11 @@ export const login = async (req, res) => {
           const { password, ...dataUser } = val._doc;
           return res
             .status(200)
-            .cookie("accessToken", token, { httpOnly: true })
+            .cookie("accessToken", token, {
+              httpOnly: true,
+              secure: true,
+              sameSite: "none",
+            })
             .json(dataUser);
         }
       });
