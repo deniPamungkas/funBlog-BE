@@ -48,7 +48,6 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static("public"));
-app.use("/uploads", express.static("uploads"));
 app.use("/file", uploadFile);
 app.use("/auth", auth);
 app.use("/post", post);
