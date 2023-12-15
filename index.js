@@ -43,10 +43,6 @@ app.use(cors(corsOption));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use((res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
 app.use(express.static("public"));
 app.use("/file", uploadFile);
 app.use("/auth", auth);
