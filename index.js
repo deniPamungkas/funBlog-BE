@@ -38,22 +38,6 @@ const corsOption = {
   credentials: true,
 };
 
-//HANDLE UPLOAD FILE
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "/uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
-// app.post("/upload", upload.single("file"), (req, res) => {
-//   const file = req.file;
-//   if (file) return res.status(200).json("file uploaded");
-//   return res.status(500).json("file not uploaded");
-// });
-
 //MIDDLEWARES
 app.use(cors(corsOption));
 app.use(express.json());
@@ -64,7 +48,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static("public"));
-app.use("/upload", express.static("uploads"));
+app.use("/uploads", express.static("uploads"));
 app.use("/file", uploadFile);
 app.use("/auth", auth);
 app.use("/post", post);
