@@ -10,6 +10,11 @@ import auth from "./routes/auth.js";
 import post from "./routes/post.js";
 import uploadFile from "./routes/uploadFile.js";
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 dotenv.config();
 
@@ -43,7 +48,7 @@ app.use(cors(corsOption));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(express.static("public"));
+app.use("/uploads", express.static(path.join(__dirname, "./public/uploads")));
 app.use("/file", uploadFile);
 app.use("/auth", auth);
 app.use("/post", post);
