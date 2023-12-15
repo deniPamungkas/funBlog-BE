@@ -43,6 +43,10 @@ const corsOption = {
   credentials: true,
 };
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+});
+
 //MIDDLEWARES
 app.use(cors(corsOption));
 app.use(express.json());
