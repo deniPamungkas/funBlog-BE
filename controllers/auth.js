@@ -42,7 +42,11 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   res
-    .clearCookie("accessToken", { secure: true, sameSite: "none" })
+    .clearCookie("accessToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
     .json("user has been loged out");
 };
 
