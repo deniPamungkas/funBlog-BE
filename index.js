@@ -39,10 +39,7 @@ app.listen(PORT, () => {
 });
 
 const corsOption = {
-  origin: [
-    "https://fun-blog-p4woogziw-deni-pamungkas-projects.vercel.app",
-    "http://localhost:5173",
-  ],
+  origin: ["https://funblogdenipamungkas.vercel.app", "http://localhost:5173"],
   credentials: true,
 };
 
